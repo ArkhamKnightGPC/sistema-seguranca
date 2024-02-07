@@ -1,39 +1,39 @@
-# sistema-seguranca
+# Security System
 
-Esse repositório contém o projeto ***Sistema de Segurança*** desenvolvido na disciplina Laboratório Digital II. O projeto vai ser desenvolvido em três 3 sprints, detalhados abaixo.
+This repository contains the ***Security System*** project developed in the Digital Laboratory II course. The project was developed in three 3 sprints, detailed below.
 
-## Semana 1: Jornada Básica
+## Week 1: Basic Journey
 
-O objetivo da Semana 1 do projeto é a implementação das funcionalidades básicas do projeto, suprindo os requisitos funcionais da Jornada Básica do usuário.
+The objective of Week 1 of the project is to implement the basic functionalities of the project, meeting the functional requirements of the user's Basic Journey.
 
-### Requisitos Funcionais
+### Functional Requirements
 
-O sistema proposto ***no modo de segurança*** deve identificar se houve alguma movimentação no interior de um cômodo e entrar ***no modo de alerta*** caso ocorra a detecção. No modo de alerta é enviada uma mensagem de alerta utilizando a ***UART*** no formato:
+The proposed system ***in security mode*** must identify if there has been any movement inside a room and enter ***alert mode*** if detection occurs. In alert mode, an alert message is sent using ***UART*** in the format:
 
-> ALERTA horario angulo,distancia
+> ALERT time angle,distance
 
-Onde ***horario***, ***angulo*** e ***distancia*** representam o horário da detecção, a posição do servomotor onde foi detectado o movimento e a distância medida pelo sensor ultrassônico nessa posição, respectivamente.
+Where ***time***, ***angle***, and ***distance*** represent the time of detection, the position of the servo motor where movement was detected, and the distance measured by the ultrasonic sensor at that position, respectively.
 
-No modo de alerta é ativado um ***buzzer***. O alerta também pode ser visto no celular do cliente pelo aplicativo ***MQTT Dash***
+In alert mode, a ***buzzer*** is activated. The alert can also be viewed on the client's mobile phone through the ***MQTT Dash*** application.
 
-### Requisitos Não-Funcionais
+### Non-Functional Requirements
 
-Para detectar o movimento, o sistema deve considerar também a ***imprecisão da medição*** e a ***condição do ambiente*** para gerar a sensibilidade do sensor. 
+To detect movement, the system must also consider ***measurement imprecision*** and ***environmental conditions*** to generate sensor sensitivity.
 
-Dessa forma, foi para uma dada medida é definido um intervalo de sensibilidade onde a variação não é considerada suficiente para acionar o alerta.
+Thus, for a given measurement, a sensitivity range is defined where the variation is not considered sufficient to trigger the alert.
 
-### Requisitos Físicos
+### Physical Requirements
 
-A princípio, são necessários os componentes do ***Kit Home Lab*** que irão interagir com a infraestrutura física do ***Lab EAD*** da disciplina Laboratório Digital II. Como o sonar será reaproveitado para o projeto do grupo, precisa-se do ***servomotor SG90*** e do ***sensor HC-SR04***, além da ***placa Wemos D1 R1*** que possui o componente ***ESP8266***.
+Initially, the components of the ***Home Lab Kit*** are necessary, which will interact with the physical infrastructure of the ***Lab EAD*** of the Digital Laboratory II course. Since the sonar will be reused for the group's project, the ***SG90 servo motor*** and the ***HC-SR04 sensor*** are needed, in addition to the ***Wemos D1 R1 board*** which has the ***ESP8266*** component.
 
-A funcionalidade de senha foi implementada usando Arduino, portanto é exclusiva do kitHome. Para possibilitar demonstrações na infraestrutura do LabEAD é possível desativar a funcionalidade de senha com um sinal de entrada. Nesse modo de teste, não é necessária a interação com Arduino. O DashBoard Processing e o Notebook Google Colab operam nesse modo de teste.
+The password functionality was implemented using Arduino, so it is exclusive to the Home Kit. To enable demonstrations in the LabEAD infrastructure, it is possible to deactivate the password functionality with an input signal. In this test mode, interaction with Arduino is not necessary. The Processing Dashboard and the Google Colab Notebook operate in this test mode.
 
-Para intermediar a comunicação com a FPGA do laboratório, também é possível usar o aplicativo ***MQTT Dash***.
+To mediate communication with the laboratory's FPGA, it is also possible to use the ***MQTT Dash*** application.
 
-### Implementação
+### Implementation
 
-![Pseudocódigo](algoritmo_semana1.png)
+![Pseudocode](week1_algorithm.png)
 
-#### Persistência de dados de eventos
+#### Persistence of event data
 
-O DashBoard Processing armazena todos os dados de sua sessão em arquivo txt.
+The Processing Dashboard stores all session data in a txt file.

@@ -1,39 +1,43 @@
 # Security System
 
-This repository contains the ***Security System*** project developed in the Digital Laboratory II course. The project was developed in three 3 sprints, detailed below.
+This repository contains the ***Security System*** project developed in the Digital Laboratory II course at the **University of São Paulo**. This project was made in 2021 during the COVID-19 pandemic and would not have been possible without the effort of the teaching staff.
 
-## Week 1: Basic Journey
+The lab sessions were carried out using an innovative RemoteLab that allowed students to load VHDL code into the DE0-CV baseboard remotely and perform tests using the MQTT messaging protocol. To learn more about this fascinating iniciative, please check out this [paper](https://www.researchgate.net/publication/355943442_Dashboard_IoT_Remote_Lab_with_MQTT_Protocol).
 
-The objective of Week 1 of the project is to implement the basic functionalities of the project, meeting the functional requirements of the user's Basic Journey.
+After a series of experiments, this project was developed in the final 3 weeks on the course with the goal of allowing the students to give their own personal spin on the course material. For us, it was an opportunity to expand on what we had seen and try to present something completely fresh.
 
-### Functional Requirements
+# Table of Contents
+1. [Physical Requirements](#physical-requirements)
+2. [System Requirements](#system-requirements)
+3. [Project Documentation and Demo](#project-documentation-and-demo)
+4. [Acknowledgements](#acknowledgements)
 
-The proposed system ***in security mode*** must identify if there has been any movement inside a room and enter ***alert mode*** if detection occurs. In alert mode, an alert message is sent using ***UART*** in the format:
+## Physical Requirements
 
-> ALERT time angle,distance
+This project was built using both the physical infrastructure of the University lab as well as some extra hardware we used at home (loving nicknamed the **Home Kit**). The project requires a ***SG90 servo motor*** and the ***HC-SR04 sensor***, in addition to the ***Wemos D1 R1 board*** which has the ***ESP8266*** component.
 
-Where ***time***, ***angle***, and ***distance*** represent the time of detection, the position of the servo motor where movement was detected, and the distance measured by the ultrasonic sensor at that position, respectively.
-
-In alert mode, a ***buzzer*** is activated. The alert can also be viewed on the client's mobile phone through the ***MQTT Dash*** application.
-
-### Non-Functional Requirements
-
-To detect movement, the system must also consider ***measurement imprecision*** and ***environmental conditions*** to generate sensor sensitivity.
-
-Thus, for a given measurement, a sensitivity range is defined where the variation is not considered sufficient to trigger the alert.
-
-### Physical Requirements
-
-Initially, the components of the ***Home Lab Kit*** are necessary, which will interact with the physical infrastructure of the ***Lab EAD*** of the Digital Laboratory II course. Since the sonar will be reused for the group's project, the ***SG90 servo motor*** and the ***HC-SR04 sensor*** are needed, in addition to the ***Wemos D1 R1 board*** which has the ***ESP8266*** component.
-
-The password functionality was implemented using Arduino, so it is exclusive to the Home Kit. To enable demonstrations in the LabEAD infrastructure, it is possible to deactivate the password functionality with an input signal. In this test mode, interaction with Arduino is not necessary. The Processing Dashboard and the Google Colab Notebook operate in this test mode.
+The password functionality was implemented using Arduino, so it is exclusive to the Home Kit. To enable demonstrations in the University Lab infrastructure, it is possible to deactivate the password functionality with an input signal. In this test mode, interaction with Arduino is not necessary. The Processing Dashboard and the Jupyter Notebook operate in this test mode.
 
 To mediate communication with the laboratory's FPGA, it is also possible to use the ***MQTT Dash*** application.
 
-### Implementation
+## System requirements
 
-![Pseudocode](week1_algorithm.png)
+The system offers easily configurable security options for the user, including:
 
-#### Persistence of event data
+- **At Home Mode:** When in at home mode, the HC-SR04 component can detect movement at the door, signaling the resident through MQTT and LEDs. The resident can then take appropriate action.
+  
+- **Away from Home Mode:** In away from home mode, any approach or movement is considered unwanted, triggering a buzzer to alert the neighborhood. The resident is also signaled through communication with their mobile device.
 
-The Processing Dashboard stores all session data in a txt file.
+Additional features include the use of passwords to arm and disarm the security system, as well as logs corresponding to each sensor trigger written to a RAM for the resident to monitor the operating history of the system.
+
+![Pseudocode algorithm](week1_algorithm.png)
+
+## Project Documentation and Demo
+
+This repository includes the complete [project documentation](Documentation.pdf). In contains details on the sprints, diagrams and explanations for the code.
+
+If you're curious to see the project in action, we also prepared a video demonstration [available on Youtube](https://www.youtube.com/watch?v=LZQfi0l7xRA0). 
+
+## Acknowledgements
+
+We would like to express our gratitude to our professor **Edson Midorikawa** and classmates for their support in this project. Long live VHDL!!
